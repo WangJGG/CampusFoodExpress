@@ -1,4 +1,4 @@
-# CampusFoodExpress - 校园美食快递平台
+# CampusFoodExpress - 校园食运通
 
 ## 📋 项目简介
 
@@ -262,8 +262,6 @@ CampusFoodExpress/
 欢迎提交 Issue 和 Pull Request！
 
 ## 📄 开源协议
-
-Licensed under the Apache License, Version 2.0.
 
 本项目采用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 开源协议。
 
