@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- 引入高德地图 JavaScript API -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=f68139f82a85eaafe082b8b15629acd4"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+  </body>
+  <script>
+    document.addEventListener('plusready', function() {
+      var webview = plus.webview.currentWebview();
+      plus.key.addEventListener('backbutton', function() {
+        webview.canBack(function(e) {
+          if (e.canBack) {
+            webview.back();
+          } else {
+            //webview.close(); //hide,quit
+            //plus.runtime.quit();
+            //首页返回键处理
+            //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+            var first = null;
+            plus.key.addEventListener('backbutton', function() {
+              //首次按键，提示‘再按一次退出应用’
+              if (!first) {
+                first = new Date().getTime();
+                console.log('再按一次退出应用');
+                setTimeout(function() {
+                  first = null;
+                }, 1000);
+              } else {
+                if (new Date().getTime() - first < 1500) {
+                  plus.runtime.quit();
+                }
+              }
+            }, false);
+          }
+        })
+      });
+    });
+  </script>
+</html>
+
